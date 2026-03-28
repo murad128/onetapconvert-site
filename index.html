@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5X7RK0DS9M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-5X7RK0DS9M');
+</script>
+<title>OneTapConvert — Free File Conversion & Tools</title>
+<meta name="description" content="Convert, merge, split, compress and rotate files instantly. Free, private, no signup required.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0d0f1a;
+  --ink2:#3d4166;
+  --ink3:#7b7f9e;
+  --bg:#f5f6fa;
+  --surface:#ffffff;
+  --border:#e4e6f0;
+  --border2:#d0d4e8;
+  --a:#5c6af7;
+  --a2:#7c89ff;
+  --al:#eef0ff;
+  --ad:#4351d6;
+  --radius:14px;
+  --rad-sm:10px;
+  --rad-lg:20px;
+  --sh:0 2px 12px rgba(13,15,26,.07);
+  --sh2:0 8px 32px rgba(92,106,247,.15);
+  --sh3:0 20px 60px rgba(13,15,26,.12);
+  --trans:.18s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:200;height:58px;background:rgba(245,246,250,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 clamp(1rem,4vw,2.5rem);gap:16px}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.nav-logo-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--a),#9b6eff);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(92,106,247,.3)}
+.nav-logo-mark svg{width:18px;height:18px}
+.nav-logo-name{font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--ink)}
+.nav-logo-name span{color:var(--a)}
+.nav-spacer{flex:1}
+.nav-pill{font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--al);color:var(--a);padding:4px 11px;border-radius:99px;border:1px solid #d4d9ff}
+.lang-sw{display:flex;align-items:center;gap:3px;background:var(--surface);border:1.5px solid var(--border);border-radius:99px;padding:3px}
+.lang-btn{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:99px;border:none;background:transparent;cursor:pointer;color:var(--ink3);transition:all var(--trans);letter-spacing:.03em}
+.lang-btn.on{background:var(--a);color:#fff}
+
+/* ── HERO ── */
+.hero{padding:clamp(56px,8vw,100px) clamp(1rem,4vw,2.5rem) clamp(48px,6vw,80px);max-width:760px;margin:0 auto;text-align:center}
+.hero-chip{display:inline-flex;align-items:center;gap:7px;background:var(--al);color:var(--a);font-size:.75rem;font-weight:700;padding:5px 13px;border-radius:99px;border:1px solid #d4d9ff;margin-bottom:24px;letter-spacing:.02em}
+.hero-chip::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--a);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;color:var(--ink);margin-bottom:18px}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--a),#9b6eff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(.95rem,2vw,1.1rem);color:var(--ink3);max-width:500px;margin:0 auto 40px;line-height:1.65}
+.hero-stats{display:flex;justify-content:center;flex-wrap:wrap;gap:24px}
+.hero-stat{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--ink2)}
+.hero-stat svg{width:14px;height:14px;color:var(--a)}
+
+/* ── TOOL GRID ── */
+.tools{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem) 80px}
+.tools-group{margin-bottom:44px}
+.group-label{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.group-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.tool-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 16px 16px;cursor:pointer;transition:all var(--trans);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;text-align:left}
+.tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--a),#9b6eff);opacity:0;transition:opacity var(--trans)}
+.tool-card:hover{border-color:var(--a);transform:translateY(-3px);box-shadow:var(--sh2)}
+.tool-card:hover::before{opacity:.04}
+.tool-card:active{transform:translateY(-1px)}
+.tc-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;position:relative;flex-shrink:0}
+.tc-body{position:relative}
+.tc-name{font-size:.875rem;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:3px}
+.tc-desc{font-size:.75rem;color:var(--ink3);line-height:1.35}
+.tc-arrow{position:absolute;top:14px;right:14px;color:var(--a);opacity:0;transform:translateX(-4px) translateY(4px);transition:all var(--trans);font-size:.8rem}
+.tool-card:hover .tc-arrow{opacity:1;transform:translateX(0) translateY(0)}
+/* icon bg variants */
+.ic-blue{background:#eef0ff}.ic-violet{background:#f3f0ff}.ic-green{background:#ecfdf5}.ic-amber{background:#fffbeb}.ic-rose{background:#fff1f2}.ic-sky{background:#f0f9ff}.ic-teal{background:#f0fdfa}.ic-pink{background:#fdf4ff}
+
+/* ── HOW IT WORKS ── */
+.how{background:var(--ink);padding:clamp(56px,6vw,80px) clamp(1rem,4vw,2.5rem);margin-bottom:0}
+.how-inner{max-width:900px;margin:0 auto;text-align:center}
+.how h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.03em;color:#fff;margin-bottom:10px}
+.how-sub{color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:48px}
+.how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px}
+.how-step{text-align:center}
+.step-icon{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.how-step h3{font-size:.875rem;font-weight:700;color:#fff;margin-bottom:5px}
+.how-step p{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.55}
+
+/* ── PRIVACY ── */
+.privacy{max-width:780px;margin:0 auto;padding:clamp(56px,6vw,80px) clamp(1rem,4vw,2.5rem)}
+.privacy-inner{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rad-lg);padding:clamp(28px,4vw,44px);text-align:center}
+.privacy-icon{width:52px;height:52px;border-radius:16px;background:var(--al);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.privacy-inner h2{font-size:1.2rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.privacy-inner p{font-size:.85rem;color:var(--ink3);line-height:1.7;max-width:480px;margin:0 auto 22px}
+.privacy-tags{display:flex;justify-content:center;flex-wrap:wrap;gap:7px}
+.ptag{font-size:.73rem;font-weight:700;color:var(--ink2);background:var(--bg);border:1px solid var(--border);padding:4px 12px;border-radius:99px;display:flex;align-items:center;gap:5px}
+.ptag::before{content:'✓';color:var(--a)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:24px clamp(1rem,4vw,2.5rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.footer-brand{display:flex;align-items:center;gap:8px;text-decoration:none}
+.footer-brand-dot{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,var(--a),#9b6eff);display:flex;align-items:center;justify-content:center}
+.footer-brand-dot svg{width:12px;height:12px}
+.footer-name{font-weight:700;font-size:.82rem;color:var(--ink)}
+footer p{font-size:.75rem;color:var(--ink3)}
+
+/* ── MODAL ── */
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:300;background:rgba(10,12,26,.55);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem}
+.modal-backdrop.open{display:flex}
+.modal{background:var(--surface);border-radius:24px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:var(--sh3);position:relative;animation:modal-in .2s cubic-bezier(.4,0,.2,1)}
+@keyframes modal-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:99px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink3);transition:all var(--trans);z-index:1}
+.modal-close:hover{background:var(--border);color:var(--ink)}
+.modal-head{padding:28px 28px 0;display:flex;align-items:center;gap:14px}
+.modal-head-icon{width:50px;height:50px;border-radius:14px;font-size:1.4rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-head-title{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;margin-bottom:2px}
+.modal-head-desc{font-size:.78rem;color:var(--ink3)}
+.modal-body{padding:20px 28px 28px;display:flex;flex-direction:column;gap:14px}
+
+/* DROP ZONE */
+.dz{border:2px dashed var(--border2);border-radius:var(--radius);padding:30px 20px;text-align:center;cursor:pointer;transition:all var(--trans);background:var(--bg);position:relative;overflow:hidden}
+.dz.drag-over{border-color:var(--a);background:var(--al)}
+.dz.has-file{border-style:solid;border-color:#22c55e;background:#f0fdf4}
+.dz input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.dz-icon{font-size:1.8rem;margin-bottom:8px;display:block}
+.dz-title{font-size:.875rem;font-weight:700;color:var(--ink);margin-bottom:3px}
+.dz-hint{font-size:.73rem;color:var(--ink3)}
+.file-pill{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:9px;font-size:.8rem}
+.fp-icon{font-size:1rem;flex-shrink:0}
+.fp-name{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.fp-size{color:var(--ink3);flex-shrink:0;font-size:.72rem}
+.fp-rm{cursor:pointer;color:var(--ink3);padding:2px;border-radius:4px;flex-shrink:0;transition:color var(--trans);font-size:.85rem;line-height:1}
+.fp-rm:hover{color:#ef4444}
+
+/* OPTIONS */
+.opts-label{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+.opts-row{display:flex;flex-wrap:wrap;gap:6px}
+.opt{padding:6px 14px;border-radius:99px;border:1.5px solid var(--border);background:var(--bg);font-size:.78rem;font-weight:600;cursor:pointer;transition:all var(--trans);color:var(--ink2)}
+.opt:hover{border-color:var(--a);color:var(--a)}
+.opt.on{background:var(--a);color:#fff;border-color:var(--a)}
+.range-row{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink2)}
+.range-row input{width:68px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:.82rem;outline:none;background:var(--bg);color:var(--ink);transition:border-color var(--trans)}
+.range-row input:focus{border-color:var(--a)}
+
+/* PROGRESS */
+.prog{display:none;flex-direction:column;gap:7px}
+.prog.show{display:flex}
+.prog-track{height:5px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--a),#9b6eff);border-radius:99px;width:0%;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.prog-label{font-size:.73rem;color:var(--ink3);display:flex;justify-content:space-between}
+
+/* STATUS */
+.stat-msg{display:none;padding:11px 14px;border-radius:10px;font-size:.82rem;font-weight:600;align-items:center;gap:8px}
+.stat-msg.show{display:flex}
+.stat-msg.ok{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.stat-msg.err{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
+.stat-msg.info{background:var(--al);color:var(--ad);border:1px solid #d4d9ff}
+
+/* BUTTONS */
+.btn-process{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--a),#7c6bfc);color:#fff;border:none;font-size:.9rem;font-weight:700;cursor:pointer;transition:all var(--trans);display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-.01em}
+.btn-process:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 22px rgba(92,106,247,.4)}
+.btn-process:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-dl{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none;font-size:.9rem;font-weight:700;cursor:pointer;transition:all var(--trans);display:none;align-items:center;justify-content:center;gap:8px}
+.btn-dl:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(34,197,94,.35)}
+.btn-dl.show{display:flex}
+.btn-new{width:100%;padding:11px;border-radius:12px;background:var(--bg);color:var(--ink2);border:1.5px solid var(--border);font-size:.82rem;font-weight:700;cursor:pointer;transition:all var(--trans);display:none;align-items:center;justify-content:center;gap:6px}
+.btn-new:hover{border-color:var(--a);color:var(--a)}
+.btn-new.show{display:flex}
+
+/* mobile */
+@media(max-width:600px){
+  .hero{padding:48px 1.25rem 40px}
+  .tools{padding:0 1.25rem 60px}
+  .modal{border-radius:20px}
+  .modal-head,.modal-body{padding-left:20px;padding-right:20px}
+  .how-steps{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">
+      <svg fill="none" stroke="white" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+    </div>
+    <span class="nav-logo-name">OneTap<span>Convert</span></span>
+  </a>
+  <div class="nav-spacer"></div>
+  <div class="lang-sw">
+    <button class="lang-btn" onclick="set_lang('az')">AZ</button>
+    <button class="lang-btn on" onclick="set_lang('en')">EN</button>
+    <button class="lang-btn" onclick="set_lang('ru')">RU</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-chip" id="t-chip"></div>
+  <h1 id="t-h1"></h1>
+  <p class="hero-sub" id="t-sub"></p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      <span id="t-stat1"></span>
+    </div>
+    <div class="hero-stat">
+      <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      <span id="t-stat2"></span>
+    </div>
+    <div class="hero-stat">
+      <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+      <span id="t-stat3"></span>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<div class="tools" id="tools-root"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <h2 id="t-how-h"></h2>
+    <p class="how-sub" id="t-how-sub"></p>
+    <div class="how-steps" id="t-steps"></div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy">
+  <div class="privacy-inner">
+    <div class="privacy-icon">🔒</div>
+    <h2 id="t-priv-h"></h2>
+    <p id="t-priv-p"></p>
+    <div class="privacy-tags" id="t-priv-tags"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-brand" href="#">
+    <div class="footer-brand-dot">
+      <svg fill="none" stroke="white" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+    </div>
+    <span class="footer-name">OneTapConvert</span>
+  </a>
+  <p id="t-footer"></p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="backdrop" onclick="handle_backdrop(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="close_modal()">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-head">
+      <div class="modal-head-icon" id="m-icon"></div>
+      <div><div class="modal-head-title" id="m-title"></div><div class="modal-head-desc" id="m-desc"></div></div>
+    </div>
+    <div class="modal-body">
+      <div class="dz" id="dz">
+        <input type="file" id="fi" onchange="on_file(event)">
+        <span class="dz-icon" id="dz-icon">☁️</span>
+        <div class="dz-title" id="t-dz-title"></div>
+        <div class="dz-hint" id="dz-hint"></div>
+      </div>
+      <div class="file-pill" id="fpill" style="display:none">
+        <span class="fp-icon">📄</span>
+        <span class="fp-name" id="fp-name"></span>
+        <span class="fp-size" id="fp-size"></span>
+        <span class="fp-rm" onclick="rm_file()">✕</span>
+      </div>
+      <div id="m-opts"></div>
+      <div class="prog" id="prog">
+        <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+        <div class="prog-label"><span id="prog-txt"></span><span id="prog-pct">0%</span></div>
+      </div>
+      <div class="stat-msg" id="stat"></div>
+      <button class="btn-process" id="btn-go" disabled onclick="go()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <span id="btn-go-lbl"></span>
+      </button>
+      <button class="btn-dl" id="btn-dl" onclick="do_dl()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span id="t-dl-btn"></span>
+      </button>
+      <button class="btn-new" id="btn-new" onclick="reset_tool()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        <span id="t-new-btn"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── LIBS ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+// ── I18N ────────────────────────────────────────────────────────────────────
+const LANGS={
+  en:{
+    chip:'Processing happens in your browser',
+    h1:'Every file tool<br>you actually <em>need</em>',
+    sub:'Convert, merge, split, compress, and rotate files — instantly, privately, for free. No account. No limits. No nonsense.',
+    stat1:'Files never leave your device',stat2:'Instant processing',stat3:'No waiting, no uploads',
+    g1:'Convert to PDF',g2:'Convert from PDF',g3:'Manage PDF',g4:'Image Tools',
+    tools:{
+      'word-pdf': ['Word → PDF','Turn .docx into a PDF','Select a Word file (.docx)'],
+      'excel-pdf':['Excel → PDF','Spreadsheets to PDF','Select an Excel or CSV file'],
+      'ppt-pdf':  ['PowerPoint → PDF','Slides to PDF','Select a PowerPoint file'],
+      'img-pdf':  ['Image → PDF','JPG, PNG, WebP → PDF','Select one or more images'],
+      'pdf-word': ['PDF → DOCX','Extract text to Word','Select a PDF file'],
+      'pdf-excel':['PDF → XLSX','Extract tables to Excel','Select a PDF file'],
+      'pdf-ppt':  ['PDF → PPTX','Pages to slide deck','Select a PDF file'],
+      'pdf-img':  ['PDF → Image','Export pages as PNG/JPG','Select a PDF file'],
+      'merge':    ['Merge PDF','Combine multiple files','Select 2 or more PDF files'],
+      'split':    ['Split PDF','Extract page ranges','Select a PDF file'],
+      'compress': ['Compress PDF','Reduce file size','Select a PDF file'],
+      'rotate':   ['Rotate PDF','Rotate pages freely','Select a PDF file'],
+      'img-convert': ['Image Convert','JPG, PNG, WebP ↔ Convert','Select an image'],
+    },
+    howH:'Simple by design',howSub:'Three steps. No setup. No waiting.',
+    steps:[
+      ['🎯','Pick a tool','Choose the operation you need from the cards above'],
+      ['📂','Upload your file','Drag & drop or click — single or multiple files'],
+      ['⚡','Process','Everything runs instantly in your browser — no server needed'],
+      ['📥','Download','Get your file immediately. Nothing is stored.'],
+    ],
+    privH:'Built for privacy',
+    privP:'All processing runs entirely in your browser using open-source libraries. Your files are never sent to any server, never stored, and never seen by anyone. Close the tab — everything is instantly gone.',
+    privTags:['No server uploads','No file storage','No tracking','No account needed','No ads','Open source'],
+    footer:'Free file tools. No sign-up. Always private. © 2026',
+    dzTitle:'Drop your file here',dzHint:'or click to browse',
+    processing:'Processing…',process:'Process File',dl:'Download File',newFile:'Process another file',
+    rotOpts:['90° CW','180°','270° CW'],compOpts:['Low (best quality)','Balanced','Max (smallest size)'],
+    rotLabel:'Rotation angle',compLabel:'Compression level',pageRange:'Page range',imgFmtLabel:'Output format',
+    fromPage:'From',toPage:'to',
+    noticeDocx:'.docx text content is extracted and rendered as a clean PDF. Complex formatting may not transfer.',
+    noticePpt:'Conversion uses client-side text extraction — layout will vary from the original.',
+    doneMsg:'Done! Your file is ready to download.',
+    compDone:(pct,saved)=>pct>0?`Done! Saved ~${pct}% (${saved}). Ready to download.`:'File optimised. Ready to download.',
+    excelNote:'Done! Data extracted as CSV (open with Excel/Google Sheets).',
+    pptNote:'Done! Saved as slide-formatted PDF (PPTX requires server-side tools).',
+    failMsg:'Processing failed: ',
+  },
+  az:{
+    chip:'Emal birbaşa brauzerinizdə baş verir',
+    h1:'Ehtiyac duyduğunuz<br>hər fayl aləti <em>burada</em>',
+    sub:'Faylları çevirin, birləşdirin, bölün, sıxışdırın — anında, gizli, pulsuz. Qeydiyyat yoxdur. Limit yoxdur.',
+    stat1:'Fayllar cihazınızı tərk etmir',stat2:'Ani emal',stat3:'Gözləmə yoxdur',
+    g1:'PDF-ə çevir',g2:'PDF-dən çevir',g3:'PDF-i idarə et',g4:'Şəkil Alətləri',
+    tools:{
+      'word-pdf': ['Word → PDF','.docx faylını PDF-ə çevir','Word faylı seçin (.docx)'],
+      'excel-pdf':['Excel → PDF','Cədvəli PDF-ə çevir','Excel və ya CSV faylı seçin'],
+      'ppt-pdf':  ['PowerPoint → PDF','Slaydları PDF-ə çevir','PowerPoint faylı seçin'],
+      'img-pdf':  ['Şəkil → PDF','JPG, PNG, WebP → PDF','Bir və ya bir neçə şəkil seçin'],
+      'pdf-word': ['PDF → DOCX','Mətni Word-ə çıxar','PDF faylı seçin'],
+      'pdf-excel':['PDF → XLSX','Cədvəlləri Excel-ə çıxar','PDF faylı seçin'],
+      'pdf-ppt':  ['PDF → PPTX','Səhifələri slaydlara çevir','PDF faylı seçin'],
+      'pdf-img':  ['PDF → Şəkil','Səhifələri PNG/JPG kimi ixrac et','PDF faylı seçin'],
+      'merge':    ['PDF Birləşdir','Bir neçə faylı birləşdir','2 və ya daha çox PDF seçin'],
+      'split':    ['PDF Böl','Səhifə aralığını çıxar','PDF faylı seçin'],
+      'compress': ['PDF Sıxışdır','Fayl ölçüsünü azalt','PDF faylı seçin'],
+      'rotate':   ['PDF Döndər','Səhifələri istədiyiniz bucaqda döndərin','PDF faylı seçin'],
+      'img-convert': ['Şəkil Çevir','JPG, PNG, WebP ↔ Çevir','Şəkil seçin'],
+    },
+    howH:'Dizayn sadəliyilə',howSub:'Üç addım. Quraşdırma yoxdur. Gözləmə yoxdur.',
+    steps:[
+      ['🎯','Alət seçin','Yuxarıdakı kartlardan lazımi əməliyyatı seçin'],
+      ['📂','Faylı yükləyin','Sürükle-burax və ya klikləyin'],
+      ['⚡','Emal et','Hər şey brauzerinizdə anında işləyir'],
+      ['📥','Yükləyin','Faylınızı dərhal alın. Heç nə saxlanmır.'],
+    ],
+    privH:'Gizlilik üçün qurulub',
+    privP:'Bütün emal açıq mənbəli kitabxanalar vasitəsilə birbaşa brauzerinizdə həyata keçirilir. Fayllarınız heç bir serverə göndərilmir, saxlanmır və heç kim tərəfindən görülmür.',
+    privTags:['Server yükləməsi yoxdur','Fayl saxlama yoxdur','İzləmə yoxdur','Qeydiyyat lazım deyil','Reklam yoxdur','Açıq mənbə'],
+    footer:'Pulsuz fayl alətləri. Qeydiyyatsız. Həmişə gizli. © 2026',
+    dzTitle:'Faylı bura buraxın',dzHint:'və ya klikləyin',
+    processing:'Emal edilir…',process:'Faylı Emal Et',dl:'Faylı Yüklə',newFile:'Başqa fayl emal et',
+    rotOpts:['90° Saat yönündə','180°','270° Saat yönündə'],compOpts:['Aşağı (yaxşı keyfiyyət)','Balans','Maksimal (kiçik ölçü)'],
+    rotLabel:'Fırlanma bucağı',compLabel:'Sıxışdırma səviyyəsi',pageRange:'Səhifə aralığı',imgFmtLabel:'Çıxış formatı',
+    fromPage:'Səhifədən',toPage:'səhifəyə',
+    noticeDocx:'.docx mətn məzmunu çıxarılır və təmiz PDF kimi göstərilir. Mürəkkəb formatlaşdırma fərqli görünə bilər.',
+    noticePpt:'Çevirmə müştəri tərəfli mətn çıxarmasından istifadə edir — layout orijinaldan fərqli ola bilər.',
+    doneMsg:'Hazır! Faylınız yüklənməyə hazırdır.',
+    compDone:(pct,saved)=>pct>0?`Hazır! ~${pct}% qənaət edildi (${saved}).`:'Fayl optimallaşdırıldı.',
+    excelNote:'Hazır! Məlumatlar CSV kimi çıxarıldı (Excel/Google Sheets ilə açın).',
+    pptNote:'Hazır! Slayd formatlı PDF kimi saxlandı.',
+    failMsg:'Emal xətası: ',
+  },
+  ru:{
+    chip:'Обработка происходит прямо в браузере',
+    h1:'Все инструменты для файлов,<br>которые вам <em>нужны</em>',
+    sub:'Конвертируйте, объединяйте, разделяйте, сжимайте файлы — мгновенно, конфиденциально, бесплатно. Без регистрации.',
+    stat1:'Файлы не покидают устройство',stat2:'Мгновенная обработка',stat3:'Без ожиданий и загрузок',
+    g1:'Конвертировать в PDF',g2:'Конвертировать из PDF',g3:'Управление PDF',g4:'Инструменты изображений',
+    tools:{
+      'word-pdf': ['Word → PDF','Конвертировать .docx в PDF','Выберите файл Word (.docx)'],
+      'excel-pdf':['Excel → PDF','Таблица в PDF','Выберите файл Excel или CSV'],
+      'ppt-pdf':  ['PowerPoint → PDF','Слайды в PDF','Выберите файл PowerPoint'],
+      'img-pdf':  ['Изображение → PDF','JPG, PNG, WebP → PDF','Выберите одно или несколько изображений'],
+      'pdf-word': ['PDF → DOCX','Извлечь текст в Word','Выберите PDF файл'],
+      'pdf-excel':['PDF → XLSX','Извлечь таблицы в Excel','Выберите PDF файл'],
+      'pdf-ppt':  ['PDF → PPTX','Страницы в слайды','Выберите PDF файл'],
+      'pdf-img':  ['PDF → Изображение','Экспорт страниц как PNG/JPG','Выберите PDF файл'],
+      'merge':    ['Объединить PDF','Объединить несколько файлов','Выберите 2 или более PDF'],
+      'split':    ['Разделить PDF','Извлечь диапазон страниц','Выберите PDF файл'],
+      'compress': ['Сжать PDF','Уменьшить размер файла','Выберите PDF файл'],
+      'rotate':   ['Повернуть PDF','Повернуть страницы','Выберите PDF файл'],
+      'img-convert': ['Конвертер изображений','JPG, PNG, WebP ↔ Конвертировать','Выберите изображение'],
+    },
+    howH:'Просто по дизайну',howSub:'Три шага. Без настройки. Без ожиданий.',
+    steps:[
+      ['🎯','Выберите инструмент','Выберите нужную операцию из карточек выше'],
+      ['📂','Загрузите файл','Перетащите или нажмите — один или несколько файлов'],
+      ['⚡','Обработка','Всё работает мгновенно в браузере — сервер не нужен'],
+      ['📥','Скачайте','Получите файл немедленно. Ничего не сохраняется.'],
+    ],
+    privH:'Создано для конфиденциальности',
+    privP:'Вся обработка выполняется в вашем браузере с использованием библиотек с открытым исходным кодом. Ваши файлы никогда не отправляются на сервер, не хранятся и не видны никому.',
+    privTags:['Без загрузки на сервер','Без хранения файлов','Без отслеживания','Без аккаунта','Без рекламы','Открытый исходный код'],
+    footer:'Бесплатные инструменты для файлов. Без регистрации. Всегда конфиденциально. © 2026',
+    dzTitle:'Перетащите файл сюда',dzHint:'или нажмите для выбора',
+    processing:'Обработка…',process:'Обработать файл',dl:'Скачать файл',newFile:'Обработать другой файл',
+    rotOpts:['90° по часовой','180°','270° по часовой'],compOpts:['Низкое (лучшее качество)','Balanced','Максимальное (меньший размер)'],
+    rotLabel:'Угол поворота',compLabel:'Уровень сжатия',pageRange:'Диапазон страниц',imgFmtLabel:'Формат вывода',
+    fromPage:'С',toPage:'по',
+    noticeDocx:'Текстовое содержимое .docx извлекается и отображается как чистый PDF. Сложное форматирование может отличаться.',
+    noticePpt:'Конвертация использует клиентское извлечение текста — макет может отличаться от оригинала.',
+    doneMsg:'Готово! Ваш файл готов к скачиванию.',
+    compDone:(pct,saved)=>pct>0?`Готово! Сэкономлено ~${pct}% (${saved}).`:'Файл оптимизирован.',
+    excelNote:'Готово! Данные извлечены как CSV (откройте в Excel/Google Sheets).',
+    pptNote:'Готово! Сохранено как PDF в формате слайдов.',
+    failMsg:'Ошибка обработки: ',
+  }
+};
+
+let LANG='en';
+function t(k){return LANGS[LANG][k];}
+
+function set_lang(l){
+  LANG=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('on',b.textContent.toLowerCase()===l);});
+  render_page();
+}
+
+function render_page(){
+  const L=LANGS[LANG];
+  // hero
+  document.getElementById('t-chip').textContent=L.chip;
+  document.getElementById('t-h1').innerHTML=L.h1;
+  document.getElementById('t-sub').textContent=L.sub;
+  document.getElementById('t-stat1').textContent=L.stat1;
+  document.getElementById('t-stat2').textContent=L.stat2;
+  document.getElementById('t-stat3').textContent=L.stat3;
+  // tools
+  const groups=[
+    {label:L.g1,ids:['word-pdf','excel-pdf','ppt-pdf','img-pdf'],icons:{
+      'word-pdf':'📝 ic-blue','excel-pdf':'📊 ic-green','ppt-pdf':'📑 ic-violet','img-pdf':'🖼️ ic-sky'
+    }},
+    {label:L.g2,ids:['pdf-word','pdf-excel','pdf-ppt','pdf-img'],icons:{
+      'pdf-word':'📄 ic-blue','pdf-excel':'📋 ic-green','pdf-ppt':'🎞️ ic-violet','pdf-img':'🖼️ ic-sky'
+    }},
+    {label:L.g3,ids:['merge','split','compress','rotate'],icons:{
+      'merge':'🔗 ic-pink','split':'✂️ ic-rose','compress':'🗜️ ic-amber','rotate':'🔄 ic-teal'
+    }},
+    {label:L.g4,ids:['img-convert'],icons:{
+      'img-convert':'🔀 ic-green'
+    }},
+  ];
+  document.getElementById('tools-root').innerHTML=groups.map(g=>`
+    <div class="tools-group">
+      <div class="group-label">${g.label}</div>
+      <div class="tool-grid">
+        ${g.ids.map(id=>{
+          const [ico,cls]=g.icons[id].split(' ');
+          const [name,desc]=L.tools[id];
+          return `<div class="tool-card" onclick="open_tool('${id}')">
+            <div class="tc-icon ${cls}">${ico}</div>
+            <div class="tc-body"><div class="tc-name">${name}</div><div class="tc-desc">${desc}</div></div>
+            <div class="tc-arrow">↗</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+  // how
+  document.getElementById('t-how-h').textContent=L.howH;
+  document.getElementById('t-how-sub').textContent=L.howSub;
+  document.getElementById('t-steps').innerHTML=L.steps.map(([ic,h,p])=>
+    `<div class="how-step"><div class="step-icon">${ic}</div><h3>${h}</h3><p>${p}</p></div>`).join('');
+  // privacy
+  document.getElementById('t-priv-h').textContent=L.privH;
+  document.getElementById('t-priv-p').textContent=L.privP;
+  document.getElementById('t-priv-tags').innerHTML=L.privTags.map(s=>`<span class="ptag">${s}</span>`).join('');
+  // footer
+  document.getElementById('t-footer').textContent=L.footer;
+  // modal static labels
+  document.getElementById('t-dz-title').textContent=L.dzTitle;
+  document.getElementById('dz-hint').textContent=L.dzHint;
+  document.getElementById('btn-go-lbl').textContent=L.process;
+  document.getElementById('t-dl-btn').textContent=L.dl;
+  document.getElementById('t-new-btn').textContent=L.newFile;
+  document.getElementById('prog-txt').textContent=L.processing;
+}
+
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+const TOOLS={
+  'merge':     {icon:'🔗',bg:'#fdf4ff',accept:'.pdf',multi:true},
+  'split':     {icon:'✂️',bg:'#fff1f2',accept:'.pdf',multi:false},
+  'compress':  {icon:'🗜️',bg:'#fffbeb',accept:'.pdf',multi:false},
+  'rotate':    {icon:'🔄',bg:'#f0fdfa',accept:'.pdf',multi:false},
+  'pdf-word':  {icon:'📄',bg:'#eef0ff',accept:'.pdf',multi:false},
+  'pdf-excel': {icon:'📋',bg:'#ecfdf5',accept:'.pdf',multi:false},
+  'pdf-ppt':   {icon:'🎞️',bg:'#f3f0ff',accept:'.pdf',multi:false},
+  'pdf-img':   {icon:'🖼️',bg:'#f0f9ff',accept:'.pdf',multi:false},
+  'word-pdf':  {icon:'📝',bg:'#eef0ff',accept:'.docx,.doc',multi:false},
+  'excel-pdf': {icon:'📊',bg:'#ecfdf5',accept:'.xlsx,.xls,.csv',multi:false},
+  'ppt-pdf':   {icon:'📑',bg:'#f3f0ff',accept:'.pptx,.ppt',multi:false},
+  'img-pdf':   {icon:'🖼️',bg:'#f0f9ff',accept:'image/*',multi:true},
+  'img-convert': {icon:'🔀',bg:'#f0fdf4',accept:'image/*',multi:false},
+};
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let CUR=null, FILES=[], RES_BLOB=null, RES_NAME='';
+
+// ── OPEN / CLOSE ─────────────────────────────────────────────────────────────
+function open_tool(id){
+  CUR=id; FILES=[]; RES_BLOB=null;
+  const cfg=TOOLS[id];
+  const L=LANGS[LANG];
+  const [name,desc,hint]=L.tools[id];
+  document.getElementById('m-icon').textContent=cfg.icon;
+  document.getElementById('m-icon').style.background=cfg.bg;
+  document.getElementById('m-title').textContent=name;
+  document.getElementById('m-desc').textContent=desc;
+  document.getElementById('fi').accept=cfg.accept;
+  document.getElementById('fi').multiple=cfg.multi;
+  document.getElementById('dz-hint').textContent=hint||L.dzHint;
+  document.getElementById('t-dz-title').textContent=L.dzTitle;
+  document.getElementById('dz-icon').textContent='☁️';
+  build_opts(id);
+  reset_tool_ui();
+  document.getElementById('backdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function close_modal(){
+  document.getElementById('backdrop').classList.remove('open');
+  document.body.style.overflow='';
+}
+function handle_backdrop(e){if(e.target===e.currentTarget)close_modal();}
+function reset_tool(){reset_tool_ui(); FILES=[]; RES_BLOB=null;}
+function reset_tool_ui(){
+  rm_file();
+  set_prog(false);
+  set_stat('','');
+  const dl=document.getElementById('btn-dl'),nb=document.getElementById('btn-new');
+  dl.classList.remove('show'); nb.classList.remove('show');
+  document.getElementById('btn-go').disabled=true;
+  document.getElementById('btn-go-lbl').textContent='Process File';
+}
+
+// ── OPTS ─────────────────────────────────────────────────────────────────────
+function build_opts(id){
+  const el=document.getElementById('m-opts');
+  const L=LANGS[LANG];
+  el.innerHTML='';
+  if(id==='rotate'){
+    el.innerHTML=`<div class="opts-label">${L.rotLabel}</div><div class="opts-row">
+      ${L.rotOpts.map((o,i)=>`<button class="opt${i===0?' on':''}" onclick="pick_opt(this)">${o}</button>`).join('')}
+    </div>`;
+  } else if(id==='split'){
+    el.innerHTML=`<div class="opts-label">${L.pageRange}</div>
+    <div class="range-row">
+      <span>${L.fromPage}</span><input type="number" id="pg-from" value="1" min="1">
+      <span>${L.toPage}</span><input type="number" id="pg-to" value="1" min="1">
+    </div>`;
+  } else if(id==='compress'){
+    el.innerHTML=`<div class="opts-label">${L.compLabel}</div><div class="opts-row">
+      ${L.compOpts.map((o,i)=>`<button class="opt${i===1?' on':''}" onclick="pick_opt(this)">${o}</button>`).join('')}
+    </div>`;
+  } else if(id==='pdf-img'){
+    el.innerHTML=`<div class="opts-label">${L.imgFmtLabel}</div><div class="opts-row">
+      <button class="opt on" onclick="pick_opt(this)">PNG</button>
+      <button class="opt" onclick="pick_opt(this)">JPG</button>
+    </div>`;
+  } else if(id==='img-convert'){
+    el.innerHTML=`<div class="opts-label">${L.imgFmtLabel}</div><div class="opts-row">
+      <button class="opt on" onclick="pick_opt(this)">PNG</button>
+      <button class="opt" onclick="pick_opt(this)">JPG</button>
+      <button class="opt" onclick="pick_opt(this)">WebP</button>
+    </div>`;
+  }
+}
+function pick_opt(btn){
+  btn.closest('.opts-row').querySelectorAll('.opt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+function active_opt(){
+  const b=document.querySelector('#m-opts .opt.on');
+  return b?b.textContent.trim():'';
+}
+
+// ── FILE HANDLING ─────────────────────────────────────────────────────────────
+function on_file(e){
+  const fs=Array.from(e.target.files);
+  if(!fs.length)return;
+  FILES=TOOLS[CUR]?.multi?fs:[fs[0]];
+  show_files();
+}
+function show_files(){
+  const dz=document.getElementById('dz'),pill=document.getElementById('fpill');
+  dz.classList.add('has-file');
+  document.getElementById('dz-icon').textContent='✅';
+  if(FILES.length===1){
+    document.getElementById('fp-name').textContent=FILES[0].name;
+    document.getElementById('fp-size').textContent=fmt_size(FILES[0].size);
+  } else {
+    document.getElementById('fp-name').textContent=`${FILES.length} files selected`;
+    document.getElementById('fp-size').textContent=fmt_size(FILES.reduce((a,f)=>a+f.size,0));
+  }
+  pill.style.display='flex';
+  document.getElementById('btn-go').disabled=false;
+  set_stat('','');
+  document.getElementById('btn-dl').classList.remove('show');
+  document.getElementById('btn-new').classList.remove('show');
+}
+function rm_file(){
+  FILES=[];
+  document.getElementById('fi').value='';
+  document.getElementById('dz').classList.remove('has-file');
+  document.getElementById('dz-icon').textContent='☁️';
+  document.getElementById('fpill').style.display='none';
+  document.getElementById('btn-go').disabled=true;
+  document.getElementById('btn-dl').classList.remove('show');
+  document.getElementById('btn-new').classList.remove('show');
+}
+
+// ── PROGRESS / STATUS ─────────────────────────────────────────────────────────
+function set_prog(show,label,pct){
+  const pw=document.getElementById('prog');
+  pw.className='prog'+(show?' show':'');
+  if(show){
+    document.getElementById('prog-txt').textContent=label||t('processing');
+    upd_prog(pct||0);
+  }
+}
+function upd_prog(pct){
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=Math.round(pct)+'%';
+}
+function set_stat(type,msg){
+  const el=document.getElementById('stat');
+  if(!type){el.className='stat-msg';return;}
+  el.className='stat-msg show '+type;
+  el.innerHTML=(type==='ok'?'✅ ':type==='err'?'❌ ':'ℹ️ ')+msg;
+}
+function fmt_size(b){
+  if(b<1024)return b+' B';
+  if(b<1024*1024)return(b/1024).toFixed(1)+' KB';
+  return(b/1024/1024).toFixed(2)+' MB';
+}
+
+// ── CANVAS HELPER ────────────────────────────────────────────────────────────
+function canvas_to_arraybuffer(canvas, mimeType, quality){
+  return new Promise((res,rej)=>{
+    canvas.toBlob(blob=>{
+      if(!blob)return rej(new Error('Canvas toBlob failed'));
+      const fr=new FileReader();
+      fr.onload=e=>res(e.target.result);
+      fr.onerror=rej;
+      fr.readAsArrayBuffer(blob);
+    }, mimeType, quality);
+  });
+}
+
+// ── MAIN GO ──────────────────────────────────────────────────────────────────
+async function go(){
+  if(!FILES.length)return;
+  const btn=document.getElementById('btn-go');
+  btn.disabled=true;
+  btn.querySelector('span').textContent=t('processing');
+  set_stat('','');
+  document.getElementById('btn-dl').classList.remove('show');
+  document.getElementById('btn-new').classList.remove('show');
+  try{
+    switch(CUR){
+      case 'merge':     await do_merge(); break;
+      case 'split':     await do_split(); break;
+      case 'compress':  await do_compress(); break;
+      case 'rotate':    await do_rotate(); break;
+      case 'pdf-word':  await do_pdf_word(); break;
+      case 'pdf-excel': await do_pdf_excel(); break;
+      case 'pdf-ppt':   await do_pdf_ppt(); break;
+      case 'pdf-img':   await do_pdf_img(); break;
+      case 'word-pdf':  await do_word_pdf(); break;
+      case 'excel-pdf': await do_excel_pdf(); break;
+      case 'ppt-pdf':   await do_ppt_pdf(); break;
+      case 'img-pdf':   await do_img_pdf(); break;
+      case 'img-convert': await do_img_convert(); break;
+    }
+  }catch(e){
+    console.error(e);
+    set_stat('err',t('failMsg')+(e.message||String(e)));
+    set_prog(false);
+  }
+  btn.disabled=false;
+  btn.querySelector('span').textContent=t('process');
+}
+function finish(blob,name){
+  RES_BLOB=blob; RES_NAME=name;
+  upd_prog(100);
+  document.getElementById('btn-dl').classList.add('show');
+  document.getElementById('btn-new').classList.add('show');
+  if(!document.getElementById('stat').classList.contains('ok'))
+    set_stat('ok',t('doneMsg'));
+}
+function do_dl(){
+  if(!RES_BLOB)return;
+  const url=URL.createObjectURL(RES_BLOB);
+  const a=document.createElement('a');
+  a.href=url; a.download=RES_NAME; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),8000);
+}
+function read_ab(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsArrayBuffer(f);})}
+function read_du(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsDataURL(f);})}
+
+// ── PDF MERGE ────────────────────────────────────────────────────────────────
+async function do_merge(){
+  set_prog(true,t('processing'),5);
+  const {PDFDocument}=PDFLib;
+  const out=await PDFDocument.create();
+  for(let i=0;i<FILES.length;i++){
+    upd_prog(10+(i/FILES.length)*80);
+    const buf=await read_ab(FILES[i]);
+    const src=await PDFDocument.load(buf);
+    const pages=await out.copyPages(src,src.getPageIndices());
+    pages.forEach(p=>out.addPage(p));
+  }
+  upd_prog(95);
+  const bytes=await out.save();
+  finish(new Blob([bytes],{type:'application/pdf'}),'merged.pdf');
+}
+
+// ── PDF SPLIT ────────────────────────────────────────────────────────────────
+async function do_split(){
+  set_prog(true,t('processing'),10);
+  const {PDFDocument}=PDFLib;
+  const buf=await read_ab(FILES[0]);
+  const src=await PDFDocument.load(buf);
+  const total=src.getPageCount();
+  const from=Math.max(0,parseInt(document.getElementById('pg-from')?.value||'1')-1);
+  const toV=parseInt(document.getElementById('pg-to')?.value||'1')-1;
+  const to=Math.min(Math.max(from,toV),total-1);
+  upd_prog(40);
+  const out=await PDFDocument.create();
+  const idx=Array.from({length:to-from+1},(_,i)=>from+i);
+  const pages=await out.copyPages(src,idx);
+  pages.forEach(p=>out.addPage(p));
+  upd_prog(90);
+  const bytes=await out.save();
+  finish(new Blob([bytes],{type:'application/pdf'}),FILES[0].name.replace(/\.pdf$/i,`_p${from+1}-${to+1}.pdf`));
+}
+
+// ── PDF COMPRESS ─────────────────────────────────────────────────────────────
+async function do_compress(){
+  set_prog(true,t('processing'),5);
+  const {PDFDocument}=PDFLib;
+  const buf=await read_ab(FILES[0]);
+  const origSize=buf.byteLength;
+
+  // Determine quality based on selected option
+  const opt=active_opt().toLowerCase();
+  let quality, scale;
+  if(opt.includes('low')||opt.includes('aşağı')||opt.includes('низк')){
+    quality=0.75; scale=1.2;  // ~40-50% reduction, good quality
+  } else if(opt.includes('max')||opt.includes('maksimal')||opt.includes('максим')){
+    quality=0.30; scale=0.75; // ~75-85% reduction
+  } else {
+    quality=0.52; scale=0.95; // ~60-70% reduction, balanced
+  }
+
+  upd_prog(8);
+
+  // Load pdf.js to render pages as images
+  let pdfjsLib;
+  try{
+    pdfjsLib=await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs');
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
+  }catch(e){
+    // Fallback: metadata-only if pdf.js unavailable
+    const doc=await PDFDocument.load(buf,{ignoreEncryption:true});
+    doc.setTitle('');doc.setAuthor('');doc.setSubject('');doc.setKeywords([]);
+    doc.setProducer('OneTapConvert');doc.setCreator('OneTapConvert');
+    const bytes=await doc.save({useObjectStreams:true});
+    finish(new Blob([bytes],{type:'application/pdf'}),FILES[0].name.replace(/\.pdf$/i,'_compressed.pdf'));
+    const saved=origSize-bytes.byteLength;
+    const pct=Math.round((saved/origSize)*100);
+    set_stat('ok',t('compDone')(Math.max(0,pct),fmt_size(Math.max(0,saved))));
+    return;
+  }
+
+  const pdfDoc=await pdfjsLib.getDocument({data:new Uint8Array(buf)}).promise;
+  const numPages=pdfDoc.numPages;
+  const out=await PDFDocument.create();
+
+  for(let i=1;i<=numPages;i++){
+    upd_prog(10+(i/numPages)*82);
+    const page=await pdfDoc.getPage(i);
+    const viewport=page.getViewport({scale});
+    const canvas=document.createElement('canvas');
+    canvas.width=Math.round(viewport.width);
+    canvas.height=Math.round(viewport.height);
+    const ctx=canvas.getContext('2d');
+    await page.render({canvasContext:ctx,viewport}).promise;
+
+    // Convert to compressed JPEG
+    const jpegBuf=await canvas_to_arraybuffer(canvas,'image/jpeg',quality);
+    const img=await out.embedJpg(jpegBuf);
+
+    // Add page with same dimensions as original viewport
+    const outPage=out.addPage([viewport.width,viewport.height]);
+    outPage.drawImage(img,{x:0,y:0,width:viewport.width,height:viewport.height});
+  }
+
+  const bytes=await out.save();
+  const saved=origSize-bytes.byteLength;
+  const pct=Math.round((saved/origSize)*100);
+
+  finish(new Blob([bytes],{type:'application/pdf'}),FILES[0].name.replace(/\.pdf$/i,'_compressed.pdf'));
+  set_stat('ok',t('compDone')(Math.max(0,pct),fmt_size(Math.max(0,saved))));
+}
+
+// ── PDF ROTATE ───────────────────────────────────────────────────────────────
+async function do_rotate(){
+  set_prog(true,t('processing'),10);
+  const {PDFDocument,degrees}=PDFLib;
+  const opt=active_opt();
+  const deg=opt.includes('180')?180:opt.includes('270')?270:90;
+  const buf=await read_ab(FILES[0]);
+  const doc=await PDFDocument.load(buf);
+  const pages=doc.getPages();
+  pages.forEach((p,i)=>{
+    upd_prog(20+(i/pages.length)*70);
+    p.setRotation(degrees((p.getRotation().angle+deg)%360));
+  });
+  upd_prog(95);
+  const bytes=await doc.save();
+  finish(new Blob([bytes],{type:'application/pdf'}),FILES[0].name.replace(/\.pdf$/i,'_rotated.pdf'));
+}
+
+// ── IMAGE → PDF ──────────────────────────────────────────────────────────────
+async function do_img_pdf(){
+  set_prog(true,t('processing'),5);
+  const {PDFDocument}=PDFLib;
+  const doc=await PDFDocument.create();
+  for(let i=0;i<FILES.length;i++){
+    upd_prog(10+(i/FILES.length)*80);
+    const f=FILES[i]; const buf=await read_ab(f);
+    let img;
+    if(f.type==='image/png') img=await doc.embedPng(buf);
+    else if(f.type==='image/jpeg'||f.type==='image/jpg') img=await doc.embedJpg(buf);
+    else{const pu=await to_png_buf(f);img=await doc.embedPng(pu);}
+    const {width:w,height:h}=img;
+    const pg=doc.addPage([w,h]);
+    pg.drawImage(img,{x:0,y:0,width:w,height:h});
+  }
+  upd_prog(95);
+  const bytes=await doc.save();
+  const name=FILES.length===1?FILES[0].name.replace(/\.[^.]+$/,'.pdf'):'images.pdf';
+  finish(new Blob([bytes],{type:'application/pdf'}),name);
+}
+function to_png_buf(file){
+  return new Promise((res,rej)=>{
+    const img=new Image(); const url=URL.createObjectURL(file);
+    img.onload=()=>{
+      const c=document.createElement('canvas');
+      c.width=img.width;c.height=img.height;
+      c.getContext('2d').drawImage(img,0,0);
+      URL.revokeObjectURL(url);
+      c.toBlob(blob=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.onerror=rej;r.readAsArrayBuffer(blob);},'image/png');
+    };
+    img.onerror=rej; img.src=url;
+  });
+}
+
+// ── SHARED: load pdf.js ──────────────────────────────────────────────────────
+async function load_pdfjs(){
+  const lib=await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs');
+  lib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
+  return lib;
+}
+
+// Render a PDF page to a canvas and return it
+async function render_page_canvas(pdfDoc, pageNum, scale){
+  const page=await pdfDoc.getPage(pageNum);
+  const vp=page.getViewport({scale});
+  const canvas=document.createElement('canvas');
+  canvas.width=Math.round(vp.width); canvas.height=Math.round(vp.height);
+  await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+  return {canvas, width:vp.width, height:vp.height};
+}
+
+// ── PDF → DOCX ───────────────────────────────────────────────────────────────
+async function do_pdf_word(){
+  set_prog(true,t('processing'),5);
+  const buf=await read_ab(FILES[0]);
+  const lib=await load_pdfjs();
+  const pdfDoc=await lib.getDocument({data:new Uint8Array(buf)}).promise;
+  const {Document,Packer,Paragraph,TextRun,HeadingLevel,ImageRun,AlignmentType}=docx;
+  const sections=[];
+
+  for(let i=1;i<=pdfDoc.numPages;i++){
+    upd_prog(8+(i/pdfDoc.numPages)*82);
+    // Render page as image at 1.5× scale for good quality in Word
+    const {canvas,width,height}=await render_page_canvas(pdfDoc,i,1.5);
+    const imgBuf=await canvas_to_arraybuffer(canvas,'image/png',1.0);
+
+    // Add page heading + image
+    sections.push(new Paragraph({
+      heading:HeadingLevel.HEADING_2,
+      children:[new TextRun({text:`Page ${i}`,bold:true,color:'4351D6',size:22})]
+    }));
+    sections.push(new Paragraph({
+      alignment:AlignmentType.CENTER,
+      children:[new ImageRun({
+        data:imgBuf, transformation:{width:Math.round(width/1.5*0.95),height:Math.round(height/1.5*0.95)},
+        type:'png'
+      })]
+    }));
+    sections.push(new Paragraph({children:[new TextRun(' ')]}));
+  }
+
+  upd_prog(94);
+  const d=new Document({sections:[{properties:{},children:sections}]});
+  const blob=await Packer.toBlob(d);
+  finish(blob,FILES[0].name.replace(/\.pdf$/i,'.docx'));
+}
+
+// ── PDF → XLSX (via pdf.co API) ───────────────────────────────────────────────
+async function do_pdf_excel(){
+  set_prog(true,t('processing'),5);
+  const buf=await read_ab(FILES[0]);
+  upd_prog(20);
+
+  // Convert to base64 (chunked to avoid stack overflow on large files)
+  const bytes=new Uint8Array(buf);
+  let binary='';
+  const chunkSize=8192;
+  for(let i=0;i<bytes.length;i+=chunkSize){
+    binary+=String.fromCharCode.apply(null,bytes.subarray(i,i+chunkSize));
+  }
+  const fileBase64=btoa(binary);
+  upd_prog(35);
+
+  try {
+    upd_prog(50);
+    const RAILWAY='https://onetapconvert-pdf-api-production.up.railway.app';
+    const resp=await fetch(`${RAILWAY}/convert`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fileBase64, fileName:FILES[0].name})
+    });
+    upd_prog(85);
+    const data=await resp.json();
+    if(data.error) throw new Error(data.error);
+
+    // decode base64 result
+    const binStr=atob(data.base64);
+    const bytes2=new Uint8Array(binStr.length);
+    for(let i=0;i<binStr.length;i++) bytes2[i]=binStr.charCodeAt(i);
+    upd_prog(98);
+    finish(new Blob([bytes2],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),
+      data.fileName||FILES[0].name.replace(/\.pdf$/i,'.xlsx'));
+
+    // Show warning or success
+    if(data.warning){
+      set_stat('ok','✅ Done! ⚠️ '+data.warning);
+    } else if(data.pdfType==='scanned'){
+      set_stat('ok','✅ Done! Scanned PDF — OCR used. Results may vary.');
+    } else {
+      set_stat('ok',t('excelNote'));
+    }
+  } catch(err){
+    let msg=err.message||'Unknown error';
+    if(msg.includes('timeout')||msg.includes('unavailable')){
+      msg='Server is starting up, please try again in 30 seconds.';
+    }
+    set_stat('err','❌ '+msg);
+    set_prog(false);
+  }
+}
+
+// ── PDF → PPTX (each page rendered as full-bleed slide image in PDF) ─────────
+// moved to top — see below
+
+
+async function do_pdf_ppt(){
+  set_prog(true,t('processing'),5);
+
+  if(typeof PptxGenJS === 'undefined'){
+    set_stat('err','PptxGenJS library not loaded. Please refresh and try again.');
+    return;
+  }
+
+  const buf=await read_ab(FILES[0]);
+  const lib=await load_pdfjs();
+  const pdfDoc=await lib.getDocument({data:new Uint8Array(buf)}).promise;
+  const total=pdfDoc.numPages;
+
+  const pptx=new PptxGenJS();
+  pptx.layout='LAYOUT_WIDE'; // 13.33" x 7.5" — 16:9
+
+  for(let i=1;i<=total;i++){
+    upd_prog(8+(i/total)*84);
+    // Render at 2× for sharp quality
+    const {canvas}=await render_page_canvas(pdfDoc,i,2.0);
+    // Get as base64 JPEG
+    const dataUrl=canvas.toDataURL('image/jpeg',0.92);
+    const base64=dataUrl.split(',')[1];
+
+    const slide=pptx.addSlide();
+    // Fill slide with white background
+    slide.background={color:'FFFFFF'};
+    // Add PDF page as full-slide image
+    slide.addImage({
+      data:'image/jpeg;base64,'+base64,
+      x:0, y:0,
+      w:'100%', h:'100%',
+    });
+  }
+
+  upd_prog(96);
+  const blob=await pptx.write({outputType:'blob'});
+  finish(blob, FILES[0].name.replace(/\.pdf$/i,'.pptx'));
+  set_stat('ok',t('pptNote'));
+}
+
+// ── PDF → IMAGE ───────────────────────────────────────────────────────────────
+async function do_pdf_img(){
+  set_prog(true,t('processing'),5);
+  const fmt=active_opt().toLowerCase()==='jpg'?'jpeg':'png';
+  const buf=await read_ab(FILES[0]);
+  const lib=await load_pdfjs();
+  const pdfDoc=await lib.getDocument({data:new Uint8Array(buf)}).promise;
+  const total=pdfDoc.numPages;
+
+  if(total===1){
+    upd_prog(30);
+    const {canvas}=await render_page_canvas(pdfDoc,1,2.0);
+    upd_prog(80);
+    canvas.toBlob(blob=>{
+      finish(blob,FILES[0].name.replace(/\.pdf$/i,fmt==='jpeg'?'_page1.jpg':'_page1.png'));
+    },'image/'+fmt,0.93);
+  } else {
+    // Multiple pages: download as ZIP using a simple method
+    // Build a single long image strip, or download page 1 + tell user to repeat
+    // Better: package into a PDF of images (already done by compress), or use JSZip
+    // We'll try to load JSZip for multi-page
+    let JSZip;
+    try{
+      const mod=await import('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+      JSZip=mod.default||window.JSZip;
+      if(!JSZip)throw new Error('no JSZip');
+    }catch(e){JSZip=null;}
+
+    if(JSZip){
+      const zip=new JSZip();
+      for(let i=1;i<=total;i++){
+        upd_prog(10+(i/total)*82);
+        const {canvas}=await render_page_canvas(pdfDoc,i,1.8);
+        const dataUrl=canvas.toDataURL('image/'+fmt,0.92);
+        const b64=dataUrl.split(',')[1];
+        const ext=fmt==='jpeg'?'jpg':'png';
+        zip.file(`page_${String(i).padStart(3,'0')}.${ext}`,b64,{base64:true});
+      }
+      upd_prog(94);
+      const blob=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:3}});
+      finish(blob,FILES[0].name.replace(/\.pdf$/i,'_images.zip'));
+      set_stat('ok',`Done! ${total} pages exported as ${fmt.toUpperCase()} images in a ZIP file.`);
+    } else {
+      // Fallback: download page 1, offer info
+      const {canvas}=await render_page_canvas(pdfDoc,1,2.0);
+      canvas.toBlob(blob=>{
+        finish(blob,FILES[0].name.replace(/\.pdf$/i,fmt==='jpeg'?'_page1.jpg':'_page1.png'));
+        set_stat('ok',`Page 1 of ${total} downloaded. For all pages, process again selecting each page range with Split PDF first.`);
+      },'image/'+fmt,0.93);
+    }
+  }
+}
+
+// ── WORD → PDF ───────────────────────────────────────────────────────────────
+async function office_to_pdf_via_backend(f){
+  set_prog(true,t('processing'),10);
+  const buf=await read_ab(f);
+  const bytes=new Uint8Array(buf);
+  let binary='';
+  const chunkSize=8192;
+  for(let i=0;i<bytes.length;i+=chunkSize){
+    binary+=String.fromCharCode.apply(null,bytes.subarray(i,i+chunkSize));
+  }
+  const fileBase64=btoa(binary);
+  upd_prog(35);
+  try{
+    // Use Railway directly to avoid Netlify 6MB body limit
+    const RAILWAY='https://onetapconvert-pdf-api-production.up.railway.app';
+    const resp=await fetch(`${RAILWAY}/office-to-pdf`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fileBase64,fileName:f.name})
+    });
+    upd_prog(85);
+    const data=await resp.json();
+    if(data.error)throw new Error(data.error);
+    const binStr=atob(data.base64);
+    const out=new Uint8Array(binStr.length);
+    for(let i=0;i<binStr.length;i++)out[i]=binStr.charCodeAt(i);
+    upd_prog(98);
+    finish(new Blob([out],{type:'application/pdf'}),data.fileName||f.name.replace(/\.[^.]+$/,'.pdf'));
+    set_stat('ok','✅ Done!');
+  }catch(err){
+    set_stat('err','❌ '+err.message);
+    set_prog(false);
+  }
+}
+
+async function do_word_pdf(){ await office_to_pdf_via_backend(FILES[0]); }
+
+// ── EXCEL / CSV → PDF ────────────────────────────────────────────────────────
+async function do_excel_pdf(){ await office_to_pdf_via_backend(FILES[0]); }
+
+// ── PPT → PDF ────────────────────────────────────────────────────────────────
+async function do_ppt_pdf(){ await office_to_pdf_via_backend(FILES[0]); }
+
+// ── IMAGE CONVERT ────────────────────────────────────────────────────────────
+async function do_img_convert(){
+  set_prog(true,t('processing'),10);
+  const f=FILES[0];
+  const fmt=active_opt().toLowerCase(); // 'png','jpg','webp'
+  const mimeMap={png:'image/png',jpg:'image/jpeg',webp:'image/webp'};
+  const extMap={png:'png',jpg:'jpg',webp:'webp'};
+  const mime=mimeMap[fmt]||'image/png';
+  const ext=extMap[fmt]||'png';
+  const quality=fmt==='png'?undefined:0.93;
+  upd_prog(30);
+  const dataUrl=await read_du(f);
+  upd_prog(50);
+  await new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>{
+      upd_prog(70);
+      const canvas=document.createElement('canvas');
+      canvas.width=img.naturalWidth;
+      canvas.height=img.naturalHeight;
+      const ctx=canvas.getContext('2d');
+      if(fmt!=='png'){
+        // fill white bg for JPG/WebP (avoid black bg on transparent PNGs)
+        ctx.fillStyle='#ffffff';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+      }
+      ctx.drawImage(img,0,0);
+      upd_prog(85);
+      canvas.toBlob(blob=>{
+        if(!blob){reject(new Error('Conversion failed'));return;}
+        const baseName=f.name.replace(/\.[^.]+$/,'');
+        upd_prog(95);
+        finish(blob,baseName+'.'+ext);
+        resolve();
+      },mime,quality);
+    };
+    img.onerror=()=>reject(new Error('Failed to load image'));
+    img.src=dataUrl;
+  });
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+render_page();
+
+// ── DRAG & DROP ──────────────────────────────────────────────────────────────
+const dzel=document.getElementById('dz');
+dzel.addEventListener('dragover',e=>{e.preventDefault();dzel.classList.add('drag-over');});
+dzel.addEventListener('dragleave',()=>dzel.classList.remove('drag-over'));
+dzel.addEventListener('drop',e=>{
+  e.preventDefault(); dzel.classList.remove('drag-over');
+  const fs=Array.from(e.dataTransfer.files); if(!fs.length)return;
+  FILES=TOOLS[CUR]?.multi?fs:[fs[0]];
+  show_files();
+});
+</script>
+</body>
+</html>

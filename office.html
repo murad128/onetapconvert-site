@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neymar's Virtual Office</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070810;--floor:#0c0e1a;--border:#1e2140;
+  --accent:#6366f1;--accent2:#8b5cf6;--green:#22c55e;
+  --yellow:#f59e0b;--red:#ef4444;--cyan:#06b6d4;
+  --text:#e2e8f0;--muted:#4b5280;--card:#111422;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Inter',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(7,8,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 0 16px rgba(99,102,241,.3)}
+.brand-name{font-weight:800;font-size:.95rem;letter-spacing:-.02em;color:var(--text)}
+.brand-name span{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.live-chip{display:flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);padding:3px 9px;border-radius:99px}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.nav-clock{font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:1080px;margin:28px auto 0;padding:0 20px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px}
+.stat-l{font-size:.65rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.stat-v{font-size:1.5rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat-s{font-size:.68rem;color:var(--muted);margin-top:3px}
+
+/* OFFICE */
+.office{max-width:1080px;margin:28px auto 0;padding:0 20px}
+.office-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:16px}
+.room{background:var(--floor);border:1px solid var(--border);border-radius:20px;padding:36px 28px 48px;position:relative;min-height:460px}
+.room::before{content:'';position:absolute;inset:0;border-radius:20px;background-image:linear-gradient(rgba(99,102,241,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+
+/* BOSS ZONE */
+.boss-zone{display:flex;justify-content:center;margin-bottom:52px;position:relative}
+.boss-zone::before{content:'BOSS';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.58rem;font-weight:800;letter-spacing:.2em;color:var(--accent);opacity:.5}
+
+/* AGENTS ZONE */
+.agents-zone{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+.zone-label{width:100%;text-align:center;font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;opacity:.55}
+
+/* DESK */
+.desk{display:flex;flex-direction:column;align-items:center;position:relative;cursor:default}
+
+/* BOSS DESK */
+.desk.boss .surface{width:196px;height:88px;background:linear-gradient(145deg,#1a2050,#14183a);border:2px solid rgba(99,102,241,.35);border-radius:14px 14px 8px 8px;box-shadow:0 0 32px rgba(99,102,241,.12),inset 0 1px 0 rgba(255,255,255,.05);position:relative;display:flex;align-items:center;justify-content:center;gap:10px}
+.desk.sub .surface{width:148px;height:68px;background:linear-gradient(145deg,#13162a,#0f1222);border:1.5px solid var(--border);border-radius:11px 11px 6px 6px;box-shadow:0 2px 10px rgba(0,0,0,.3);position:relative;display:flex;align-items:center;justify-content:center}
+.desk.empty .surface{width:148px;height:68px;background:rgba(255,255,255,.02);border:1.5px dashed rgba(255,255,255,.07);border-radius:11px 11px 6px 6px;display:flex;align-items:center;justify-content:center}
+.surface-shine{position:absolute;top:0;left:12px;right:12px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent)}
+
+/* LEGS */
+.legs{border-radius:0 0 5px 5px;border-top:none}
+.desk.boss .legs{width:172px;height:9px;background:linear-gradient(180deg,#14183a,#0d1028);border:1px solid rgba(99,102,241,.2)}
+.desk.sub .legs{width:128px;height:7px;background:linear-gradient(180deg,#0f1222,#090c18);border:1px solid var(--border)}
+.desk.empty .legs{width:128px;height:7px;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.05)}
+
+/* CHAIR */
+.chair{border-radius:8px 8px 0 0;margin-top:3px}
+.desk.boss .chair{width:42px;height:18px;background:linear-gradient(180deg,#1e2250,#14163a);border:1px solid rgba(99,102,241,.2)}
+.desk.sub .chair{width:34px;height:14px;background:linear-gradient(180deg,#13162a,#0d0f1e);border:1px solid var(--border)}
+.desk.empty .chair{width:34px;height:14px;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.05)}
+
+/* AVATAR */
+.av-wrap{position:absolute;top:-54px;display:flex;flex-direction:column;align-items:center}
+.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;position:relative;flex-shrink:0}
+.desk.boss .av{width:52px;height:52px;font-size:1.15rem;background:linear-gradient(135deg,var(--accent),var(--accent2));border:3px solid rgba(99,102,241,.45);box-shadow:0 0 20px rgba(99,102,241,.35)}
+.desk.sub .av{width:40px;height:40px;font-size:.85rem;border:2px solid var(--border)}
+.desk.empty .av{width:40px;height:40px;font-size:.9rem;background:rgba(255,255,255,.03);border:1.5px dashed rgba(255,255,255,.1);color:rgba(255,255,255,.2)}
+.online-dot{position:absolute;bottom:1px;right:1px;border-radius:50%;border:2px solid var(--floor)}
+.desk.boss .online-dot{width:12px;height:12px}
+.desk.sub .online-dot{width:9px;height:9px}
+.dot-on{background:var(--green)}
+.dot-busy{background:var(--yellow)}
+.dot-off{background:var(--muted)}
+.dot-to{background:var(--red)}
+
+/* NAMEPLATE */
+.np{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:2px 7px;font-size:.6rem;font-weight:700;letter-spacing:.03em;max-width:130px;overflow:hidden;text-overflow:ellipsis}
+.desk.boss .np{border-color:rgba(99,102,241,.25);color:#a5b4fc}
+
+/* MONITOR */
+.mon{background:#050710;border:1.5px solid rgba(99,102,241,.25);border-radius:4px;position:relative;overflow:hidden;flex-shrink:0}
+.mon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,.12),transparent);animation:flicker 3s ease infinite}
+@keyframes flicker{0%,100%{opacity:1}60%{opacity:.7}}
+.desk.boss .mon{width:50px;height:34px}
+.desk.sub .mon{width:36px;height:24px}
+.mon-stand{background:#111;border-radius:2px;margin:1px auto 0}
+.desk.boss .mon-stand{width:18px;height:3px}
+.desk.sub .mon-stand{width:13px;height:2px}
+.mon-base{background:#161828;border-radius:2px}
+.desk.boss .mon-base{width:26px;height:2px}
+.desk.sub .mon-base{width:18px;height:2px}
+
+/* KEYBOARD */
+.kb{background:#0d1020;border:1px solid rgba(99,102,241,.15);border-radius:3px}
+.desk.boss .kb{width:32px;height:10px}
+.desk.sub .kb{width:22px;height:7px}
+
+/* INFO TOOLTIP */
+.tooltip{
+  position:absolute;bottom:-118px;left:50%;transform:translateX(-50%);
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:10px 14px;min-width:172px;text-align:center;
+  box-shadow:0 10px 32px rgba(0,0,0,.5);z-index:20;
+  opacity:0;pointer-events:none;transition:opacity .18s;white-space:nowrap
+}
+.desk:hover .tooltip{opacity:1;pointer-events:auto}
+.tt-name{font-weight:800;font-size:.82rem;margin-bottom:3px}
+.tt-model{font-size:.68rem;margin-bottom:5px;font-weight:600}
+.tt-time{font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.tt-tokens{font-size:.65rem;color:var(--muted);margin-top:2px}
+.tt-chip{font-size:.64rem;padding:2px 8px;border-radius:99px;display:inline-flex;align-items:center;gap:4px;margin-top:5px;font-weight:700}
+.chip-active{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.chip-done{background:rgba(75,82,128,.12);color:var(--muted);border:1px solid rgba(75,82,128,.2)}
+.chip-working{background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)}
+.chip-timeout{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+
+/* LOG */
+.log-wrap{max-width:1080px;margin:28px auto 60px;padding:0 20px}
+.log-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.log-head h3{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.log-box{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.log-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.03);font-size:.74rem;transition:background .15s}
+.log-row:last-child{border-bottom:none}
+.log-row:hover{background:rgba(255,255,255,.02)}
+.lr-time{color:var(--muted);min-width:44px;font-size:.67rem;font-variant-numeric:tabular-nums}
+.lr-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.lr-boss{background:var(--accent)}
+.lr-agent{background:var(--accent2)}
+.lr-sys{background:var(--muted)}
+.lr-msg{flex:1;color:var(--text)}
+.lr-msg .ag{color:var(--accent);font-weight:700}
+.empty{text-align:center;padding:28px;color:var(--muted);font-size:.78rem}
+
+/* FAB */
+.fab{position:fixed;bottom:22px;right:22px;z-index:150}
+.fab-clear{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-bottom:8px;transition:all .15s}
+.fab-clear:hover{border-color:var(--red);color:var(--red)}
+.fab-add{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 18px rgba(99,102,241,.4);transition:all .15s}
+.fab-add:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(99,102,241,.55)}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:1rem}
+.modal-bg.open{display:flex}
+.modal{background:#111422;border:1px solid var(--border);border-radius:18px;padding:24px;width:100%;max-width:380px;box-shadow:0 24px 64px rgba(0,0,0,.5)}
+.modal h2{font-size:.95rem;font-weight:800;margin-bottom:18px}
+.mf-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px;margin-top:12px}
+.mf-label:first-of-type{margin-top:0}
+.mf-input,.mf-select{width:100%;padding:8px 11px;background:#070810;border:1px solid var(--border);border-radius:9px;color:var(--text);font-size:.82rem;outline:none;transition:border-color .15s}
+.mf-input:focus,.mf-select:focus{border-color:var(--accent)}
+.mf-btns{display:flex;gap:8px;margin-top:18px}
+.mf-cancel{flex:1;padding:9px;border-radius:9px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-size:.8rem}
+.mf-ok{flex:1;padding:9px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;cursor:pointer;font-size:.8rem;font-weight:700}
+
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}.room{padding:24px 14px 40px}.boss-zone{margin-bottom:40px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#">
+    <div class="brand-icon">🏢</div>
+    <div class="brand-name">Neymar's <span>Office</span></div>
+  </a>
+  <div class="nav-right">
+    <div class="live-chip"><div class="live-dot"></div>LIVE</div>
+    <div class="nav-clock" id="clock">--:--:--</div>
+  </div>
+</nav>
+
+<div class="stats">
+  <div class="stat"><div class="stat-l">Active Agents</div><div class="stat-v" id="s-active">—</div><div class="stat-s">working right now</div></div>
+  <div class="stat"><div class="stat-l">Total Sessions</div><div class="stat-v" id="s-total">—</div><div class="stat-s">all time subagents</div></div>
+  <div class="stat"><div class="stat-l">Boss Uptime</div><div class="stat-v" id="s-uptime" style="font-size:1.1rem;margin-top:4px">00:00:00</div><div class="stat-s">Neymar online</div></div>
+  <div class="stat"><div class="stat-l">Boss Model</div><div class="stat-v" style="font-size:.95rem;margin-top:4px">Sonnet 4.6</div><div class="stat-s">claude-sonnet-4-6</div></div>
+</div>
+
+<div class="office">
+  <div class="office-label">🏢 Virtual Office Floor — Live View</div>
+  <div class="room">
+    <div class="boss-zone">
+      <div class="desk boss" id="boss-desk">
+        <div class="av-wrap">
+          <div class="av">N<div class="online-dot dot-on"></div></div>
+        </div>
+        <div class="surface">
+          <div class="surface-shine"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div class="mon"></div>
+            <div class="mon-stand"></div>
+            <div class="mon-base"></div>
+          </div>
+          <div class="kb"></div>
+          <div class="np">Neymar · Boss</div>
+        </div>
+        <div class="legs"></div>
+        <div class="chair"></div>
+        <div class="tooltip">
+          <div class="tt-name">⚡ Neymar</div>
+          <div class="tt-model" style="color:var(--accent)">Sonnet 4.6</div>
+          <div class="tt-time" id="boss-tt-time">00:00:00</div>
+          <div class="tt-chip chip-active">● Active</div>
+        </div>
+      </div>
+    </div>
+    <div class="zone-label">Subagents</div>
+    <div class="agents-zone" id="agents-zone"></div>
+  </div>
+</div>
+
+<div class="log-wrap">
+  <div class="log-head">
+    <h3>Activity Log</h3>
+    <span style="font-size:.67rem;color:var(--muted)" id="log-count">0 events</span>
+  </div>
+  <div class="log-box" id="log-box"><div class="empty">Loading...</div></div>
+</div>
+
+<div class="fab">
+  <button class="fab-clear" onclick="clearManual()" title="Clear manual agents">🗑</button>
+  <button class="fab-add" onclick="openModal()" title="Add agent manually">+</button>
+</div>
+
+<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h2>➕ Add Agent Manually</h2>
+    <label class="mf-label">Name</label>
+    <input class="mf-input" id="m-name" placeholder="e.g. Builder-02">
+    <label class="mf-label">Model</label>
+    <select class="mf-select" id="m-model">
+      <option value="claude-sonnet-4-6">Sonnet 4.6 — Reasoning</option>
+      <option value="claude-haiku-4-5">Haiku 4.5 — Fast</option>
+      <option value="claude-opus-4-6">Opus 4.6 — Critical</option>
+    </select>
+    <label class="mf-label">Task (optional)</label>
+    <input class="mf-input" id="m-task" placeholder="e.g. Building Ping app...">
+    <div class="mf-btns">
+      <button class="mf-cancel" onclick="closeModal()">Cancel</button>
+      <button class="mf-ok" onclick="addManual()">Add to Office</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+const pad = n => String(n).padStart(2,'0')
+const fmtMs = ms => { const s=Math.floor(ms/1000); return `${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}` }
+const fmtTime = ts => { const d=new Date(ts); return `${pad(d.getHours())}:${pad(d.getMinutes())}` }
+const initials = n => n?n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2):'?'
+const COLORS = ['#6366f1','#8b5cf6','#ec4899','#06b6d4','#10b981','#f59e0b','#ef4444','#14b8a6','#f97316','#84cc16']
+const agentColor = i => COLORS[i % COLORS.length]
+const MODEL_COLORS = { 'Sonnet 4.6':'#6366f1', 'Haiku 4.5':'#06b6d4', 'Haiku 3.5':'#06b6d4', 'Opus 4.6':'#f59e0b' }
+const modelColor = m => MODEL_COLORS[m] || '#6366f1'
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+let bossStart = Date.now()
+let manualAgents = JSON.parse(localStorage.getItem('vo_manual') || '[]')
+let logs = JSON.parse(localStorage.getItem('vo_logs') || '[]')
+let liveAgents = []
+let lastAgentIds = new Set()
+
+// ── CLOCK ────────────────────────────────────────────────────────────────────
+setInterval(() => {
+  const d = new Date()
+  document.getElementById('clock').textContent = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`
+  document.getElementById('s-uptime').textContent = fmtMs(Date.now() - bossStart)
+  document.getElementById('boss-tt-time').textContent = fmtMs(Date.now() - bossStart)
+  // Update agent timers
+  document.querySelectorAll('[data-start]').forEach(el => {
+    const start = parseInt(el.dataset.start)
+    const end = el.dataset.end ? parseInt(el.dataset.end) : null
+    el.textContent = fmtMs(end ? end - start : Date.now() - start)
+  })
+}, 1000)
+
+// ── FETCH LIVE DATA ───────────────────────────────────────────────────────────
+async function fetchLive() {
+  try {
+    const res = await fetch('http://localhost:3099/sessions')
+    const data = await res.json()
+    if (data.boss?.startedAt) bossStart = data.boss.startedAt
+    liveAgents = data.agents || []
+    document.getElementById('s-total').textContent = data.totalSessions || liveAgents.length
+
+    // Detect new agents → add to log
+    liveAgents.forEach(ag => {
+      if (!lastAgentIds.has(ag.fullId || ag.id)) {
+        lastAgentIds.add(ag.fullId || ag.id)
+        addLog(`<span class="ag">${ag.name}</span> spawned · ${ag.modelShort}`, 'agent')
+      }
+    })
+
+    renderAll()
+  } catch(e) {
+    // API unreachable — render with manual only
+    renderAll()
+  }
+}
+
+// ── RENDER ───────────────────────────────────────────────────────────────────
+function renderAll() {
+  const allAgents = [
+    ...liveAgents.map(a => ({ ...a, source: 'live' })),
+    ...manualAgents.map(a => ({ ...a, source: 'manual' }))
+  ]
+
+  const active = allAgents.filter(a => a.status === 'working').length
+  document.getElementById('s-active').textContent = active
+
+  const zone = document.getElementById('agents-zone')
+  const MAX_EMPTY = Math.max(0, 6 - allAgents.length)
+  let html = ''
+
+  allAgents.forEach((ag, i) => {
+    const col = agentColor(i)
+    const mc = modelColor(ag.modelShort || ag.model || '')
+    const elapsed = ag.endedAt ? ag.endedAt - ag.startedAt : ag.endTime ? ag.endTime - ag.startTime : Date.now() - (ag.startedAt || ag.startTime || Date.now())
+    const startTs = ag.startedAt || ag.startTime || Date.now()
+    const endTs = ag.endedAt || ag.endTime || null
+    const dotCls = ag.status === 'working' ? 'dot-busy' : ag.status === 'timeout' ? 'dot-to' : 'dot-off'
+    const chipCls = ag.status === 'working' ? 'chip-working' : ag.status === 'timeout' ? 'chip-timeout' : 'chip-done'
+    const chipTxt = ag.status === 'working' ? '⚙ Working' : ag.status === 'timeout' ? '✕ Timeout' : '✓ Done'
+    const modelLabel = ag.modelShort || ag.model || 'Unknown'
+    const tokens = ag.tokensOut ? `${ag.tokensOut.toLocaleString()} tokens out` : ''
+    const removeBtn = ag.source === 'manual' ? `<button onclick="removeManual('${ag.id}')" style="margin-top:7px;font-size:.62rem;color:var(--muted);background:none;border:1px solid var(--border);border-radius:6px;padding:2px 7px;cursor:pointer">Remove</button>` : ''
+
+    html += `
+    <div class="desk sub">
+      <div class="av-wrap">
+        <div class="av" style="background:linear-gradient(135deg,${col}28,${col}14);border-color:${col}40;color:${col}">
+          ${initials(ag.name)}
+          <div class="online-dot ${dotCls}"></div>
+        </div>
+      </div>
+      <div class="surface">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+          <div class="mon"></div>
+          <div class="mon-stand"></div>
+          <div class="mon-base"></div>
+        </div>
+        <div class="np" style="color:${col}99">${ag.name}</div>
+      </div>
+      <div class="legs"></div>
+      <div class="chair"></div>
+      <div class="tooltip">
+        <div class="tt-name">${ag.name}</div>
+        <div class="tt-model" style="color:${mc}">${modelLabel}</div>
+        <div class="tt-time" data-start="${startTs}" ${endTs ? `data-end="${endTs}"` : ''}>${fmtMs(elapsed)}</div>
+        ${tokens ? `<div class="tt-tokens">${tokens}</div>` : ''}
+        <div class="tt-chip ${chipCls}">${chipTxt}</div>
+        ${removeBtn}
+      </div>
+    </div>`
+  })
+
+  for (let i = 0; i < MAX_EMPTY; i++) {
+    html += `
+    <div class="desk empty">
+      <div class="av-wrap"><div class="av">+</div></div>
+      <div class="surface"><div class="np" style="color:rgba(255,255,255,.1)">Empty Seat</div></div>
+      <div class="legs"></div>
+      <div class="chair"></div>
+    </div>`
+  }
+
+  zone.innerHTML = html
+  renderLog()
+}
+
+// ── LOG ───────────────────────────────────────────────────────────────────────
+function addLog(msg, type = 'sys') {
+  logs.unshift({ ts: Date.now(), msg, type })
+  if (logs.length > 100) logs = logs.slice(0, 100)
+  localStorage.setItem('vo_logs', JSON.stringify(logs))
+}
+
+function renderLog() {
+  const box = document.getElementById('log-box')
+  document.getElementById('log-count').textContent = logs.length + ' events'
+  if (!logs.length) { box.innerHTML = '<div class="empty">No activity yet.</div>'; return }
+  box.innerHTML = logs.slice(0, 40).map(l =>
+    `<div class="log-row"><span class="lr-time">${fmtTime(l.ts)}</span><span class="lr-dot lr-${l.type}"></span><span class="lr-msg">${l.msg}</span></div>`
+  ).join('')
+}
+
+// ── MANUAL AGENTS ─────────────────────────────────────────────────────────────
+function openModal() { document.getElementById('modal').classList.add('open') }
+function closeModal() { document.getElementById('modal').classList.remove('open') }
+
+function addManual() {
+  const name = document.getElementById('m-name').value.trim() || `Agent-${String(manualAgents.length + 1).padStart(2,'0')}`
+  const model = document.getElementById('m-model').value
+  const task = document.getElementById('m-task').value.trim()
+  const modelShort = { 'claude-sonnet-4-6': 'Sonnet 4.6', 'claude-haiku-4-5': 'Haiku 4.5', 'claude-opus-4-6': 'Opus 4.6' }[model]
+  const ag = { id: Date.now().toString(36), name, model, modelShort, task, status: 'working', startTime: Date.now(), source: 'manual' }
+  manualAgents.push(ag)
+  localStorage.setItem('vo_manual', JSON.stringify(manualAgents))
+  addLog(`<span class="ag">${name}</span> added manually · ${modelShort}`, 'agent')
+  closeModal()
+  renderAll()
+}
+
+function removeManual(id) {
+  manualAgents = manualAgents.filter(a => a.id !== id)
+  localStorage.setItem('vo_manual', JSON.stringify(manualAgents))
+  renderAll()
+}
+
+function clearManual() {
+  if (!confirm('Clear manual agents and logs?')) return
+  manualAgents = []; logs = []
+  localStorage.setItem('vo_manual', '[]')
+  localStorage.setItem('vo_logs', '[]')
+  renderAll()
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+addLog('Neymar (Boss) online · Sonnet 4.6', 'boss')
+fetchLive()
+setInterval(fetchLive, 5000) // poll every 5 seconds
+</script>
+</body>
+</html>
