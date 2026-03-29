@@ -1247,7 +1247,7 @@ async function sendFeedback(){
   const btn=document.getElementById('fb-send');
   btn.textContent='Sending...';btn.disabled=true;
   try{
-    await fetch('/.netlify/functions/feedback',{
+    await fetch('https://onetapconvert-pdf-api-production.up.railway.app/feedback',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({message:msg,email:document.getElementById('fb-email').value,url:location.href})
